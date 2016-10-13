@@ -2,6 +2,7 @@ package com.example.administrator.sexygirl;
 
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
@@ -13,6 +14,8 @@ import com.google.gson.Gson;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SexyGirlRequest<T> extends JsonRequest<T> {
 
@@ -66,4 +69,10 @@ public class SexyGirlRequest<T> extends JsonRequest<T> {
 		return null;
 	}
 
+	@Override
+	public Map<String, String> getHeaders() throws AuthFailureError {
+		HashMap<String,String> header = new HashMap<>();
+		header.put("apikey", "9cf5aecf1fd1c219a835903acca0f53b");
+		return header;
+	}
 }
