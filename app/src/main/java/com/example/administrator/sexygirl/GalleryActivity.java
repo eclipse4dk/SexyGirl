@@ -1,10 +1,12 @@
 package com.example.administrator.sexygirl;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -32,7 +34,18 @@ public class GalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gallery);
         ButterKnife.bind(this);
         loadDataFromServer();
+        mGalleryListview.setOnItemClickListener(listener);
     }
+
+    private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            int girlId = datas.get(position).getId();
+            Intent intent = new Intent(GalleryActivity.this,GalleryDetailActivity.class);
+            intent.putExtra("id",girlId);
+            startActivity(intent);
+        }
+    };
 
     private void loadDataFromServer() {
         int id = getIntent().getIntExtra("id", 0);
